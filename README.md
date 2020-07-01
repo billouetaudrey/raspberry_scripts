@@ -1,6 +1,7 @@
 # script
-Mirror Script
-First you need to install rclone on your server
+
+
+1/ First you need to install rclone on your server
 
 sudo apt-get install rclone
 
@@ -33,3 +34,7 @@ team drive : n
 All ok : y
 
 and quit : q
+
+2/ Install megatools
+
+sudo apt install megatools
