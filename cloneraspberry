@@ -1,0 +1,63 @@
+#!/bin/bash
+clear
+#Affichage des disques
+echo "Affichage des disque"
+sudo fdisk -l
+
+#Choix disque de destination (Exemple sdd )
+echo "Choisir votre disque destination"
+read disk
+
+#Démontage des disques dur important (Remplacer par les votres)
+echo "hdd a démonter"
+read hdd1
+read hdd2
+sudo umount -v $hdd1
+sudo umount -v $hdd3
+echo "Fait!"
+
+#Update
+sudo apt-get autoremove -y
+sudo apt-get purge -y
+sudo apt-get update -y
+sudo apt-get upgrade -y
+sudo apt-get dietpi-update
+sudo apt-get autoremove -y
+
+#Extinction des services (Remplacer par les votres)
+echo "Choisir les service a stopper"
+read service1
+read service2
+read service3
+read service4
+
+echo "Extinction des services"
+sudo systemctl stop $service1
+sudo systemctl stop $service2
+sudo systemctl stop $service3
+sudo systemctl stop $service4
+
+echo "Fait!"
+
+#Démarrage de rpi-clone
+echo "Entrer le dossier de rpi-clone (ex : /home/pi/rpiclone/"
+read rpiclone
+echo "Démarrage de rpi-clone"
+sudo $rpiclone/rpi-clone -v $disk
+
+#Redémarrage des services ( Remplacer par les votres )
+echo "Démarrage des services"
+sudo systemctl start $service1
+sudo systemctl start $service2
+sudo systemctl start $service3
+sudo systemctl start $service4
+
+#Remontage de vos HDD ( Remplacer par les votres)
+echo "Remontage de vos disque dur"
+sudo sh /home/dietpi/Scripts/mount.sh
+
+#Envoi mail (Rentrer votre mail après mail )
+echo "Clone Raspberry Réussi" | mutt -s  "Clone Raspberry Réussi" @gmail.com
+
+#Info commande mail : https://doc.ubuntu-fr.org/msmtp
+echo "Done :D"
