@@ -57,7 +57,9 @@ echo "Remontage de vos disque dur"
 sudo sh /home/dietpi/Scripts/mount.sh
 
 #Envoi mail (Rentrer votre mail après mail )
-echo "Clone Raspberry Réussi" | mutt -s  "Clone Raspberry Réussi" @gmail.com
+echo " Enter your email "
+read email
+echo "Clone Raspberry Réussi" | mutt -s  "Clone Raspberry Réussi" $email
 
 #Info commande mail : https://doc.ubuntu-fr.org/msmtp
 echo "Done :D"
