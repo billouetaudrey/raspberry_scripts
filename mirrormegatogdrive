@@ -1,0 +1,31 @@
+#Mirroring Mega Link to Gdrive with rclone :
+
+#welcome
+echo "Welcome to my script for  mirroring to gdrive"
+echo "Delete all zip on Folder"
+echo "Enter local folder"
+read localfolder ( example /mnt/hdd/rom/)
+rm -rf $localfolder*
+#Download mega
+echo "Enter link mega"
+read link
+#Downloading
+echo "Downloading"
+#Edit path of megatools 
+/home/dietpi/Scripts/Mirror/megatools/megatools dl --path $localfolder $link
+#List
+echo "List folder"
+rclone lsf GoogleDrive:ROM
+#enter folder to upload
+echo "Enter folder name , Ex:MiRoom"
+read folder
+#Ready to uploading
+echo "Upload in progress..."
+rclone copy --verbose "$localfolder" GoogleDrive:ROM/$folder/
+#give link
+rclone link GoogleDrive:ROM/$folder/
+#Done Now Delete zip on Local
+echo "Delete all zip on local folder"
+rm -rf $localfolder*
+rclone link GoogleDrive:ROM/$folder/
+echo "done"
