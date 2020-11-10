@@ -9,11 +9,8 @@ echo "Choisir votre disque destination"
 read disk
 
 #Démontage des disques dur important (Remplacer par les votres)
-echo "hdd a démonter"
-read hdd1
-read hdd2
-sudo umount -v $hdd1
-sudo umount -v $hdd2
+echo "Démontage des disques durs externes"
+sudo umount -v /dev/sd*
 echo "Fait!"
 
 #Update
