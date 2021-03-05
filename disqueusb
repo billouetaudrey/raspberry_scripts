@@ -1,0 +1,4 @@
+mount -t ntfs-3g UUID=4E1AEA7B1AEA6007 /mnt/Elements
+mount -t ntfs-3g UUID=3416AEED16AEAF74 /mnt/Maxtor
+mount -t ntfs-3g UUID=90048DF7048DE098 /mnt/tmp
+mount -t ntfs-3g UUID=FAB2E22AB2E1EB59 /mnt/Elements2
