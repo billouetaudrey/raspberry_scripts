@@ -1,0 +1,39 @@
+#!/bin/bash
+clear
+#Display Hard disk
+echo "Display Hard Disk"
+sudo fdisk -l
+
+#Select destination (Example sdd )
+echo "Select destination"
+read disk
+
+#Stop all service
+echo "Stopping all services"
+/boot/dietpi/dietpi-services stop
+echo "Done!"
+
+#Optionnal : Unmount hard disk
+sudo disqueusbumount
+#echo "Done!"
+
+#Update
+sudo /usr/bin/update
+
+#Start Rpi-Clone
+echo "Starting rpi-clone"
+sudo /home/dietpi/rpi-clone/rpi-clone -v $disk
+
+#Restart Services
+echo "Starting services"
+/boot/dietpi/dietpi-services start
+
+#Mount Hard Disk
+echo "Mount Hard Disk"
+sudo /usr/bin/disqueusb
+
+#Send Mail
+echo "Clone Raspberry done" | mutt -s "Clone done" mail@mail.com < /var/log/rpi-clone.log
+echo "Done :D"
+
+#Info commande mail : https://doc.ubuntu-fr.org/msmtp
