@@ -1,0 +1,6 @@
+	mkdir /home/dietpi/rpi-clone
+  cd 	mkdir /home/dietpi/rpi-clone
+  git clone https://github.com/billw2/rpi-clone.git 
+	cd rpi-clone
+  
+  Source : https://github.com/billw2/rpi-clone
