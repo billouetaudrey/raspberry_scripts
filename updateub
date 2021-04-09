@@ -1,0 +1,16 @@
+#Date
+sudo date > /home/dietpi/userbot/userbotup.log &&
+
+#KensurBot Update
+cd /home/dietpi/userbot/KensurBot/
+sudo git pull origin master >> /home/dietpi/userbotup.log &&
+sudo pip3 install -r requirements.txt -U >> /home/dietpi/userbotup.log &&
+
+
+#GoodCat Update
+#cd /home/dietpi/userbot/catuserbot/
+#sudo git pull origin master >> /home/dietpi/userbot/userbotup.log &&
+#sudo python3.8 -m  pip install -r requirements.txt -U >> /home/dietpi/userbot/userbotup.log &&
+
+#Mail
+mutt -s "Log Userbot update" -c ***@gmail.com < /home/dietpi/userbot/userbotup.log
