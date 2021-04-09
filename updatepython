@@ -1,0 +1,24 @@
+
+
+echo "Enter Full Link"
+read url
+wget $url
+echo "Enter tgz name like Python-3.8.0.tgz"
+read nametgz
+sudo tar zxf $nametgz
+echo "Enter path name like Python-3.8.0"
+read name
+cd $name
+echo "Installation in progress"
+sudo ./configure --enable-optimizations && sudo make -j 4 && sudo make altinstall
+echo "Enter version (Like 3.8 , 3.9 ...)"
+read vers
+python$vers -V
+echo "Using latest by default"
+echo "alias python=/usr/local/bin/python$vers" >> ~/.bashrc
+source ~/.bashrc
+#Done
+python -V
+echo "Clean"
+sudo rm -rf ./$nametgz
+sudo rm -rf ./$name
