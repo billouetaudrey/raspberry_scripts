@@ -1,18 +1,17 @@
-echo "Enter Full Link"
-read url
-wget $url
-echo "Enter Python name like Python-3.8.0"
-read name
-sudo tar zxf $name.tgz
-cd $name
+echo "Enter version (Like 3.8 , 3.9 ...)"
+read version
+echo "Enter version (ex : 3.8.0)"
+read vers
+sudo apt install --no-install-recommends -y curl git libffi-dev libjpeg-dev libwebp-dev python3-lxml python3-psycopg2 libpq-dev $
+wget https://www.python.org/ftp/python/$vers/Python-$vers.tgz
+sudo tar zxf Python-$vers.tgz
+cd Python-$vers
 echo "Installation in progress"
 sudo ./configure --enable-optimizations && sudo make -j 4 && sudo make altinstall
-echo "Enter version (Like 3.8 , 3.9 ...)"
-read vers
-python$vers -V
+python$version -V
 echo "Using latest by default"
-echo "alias python=/usr/local/bin/python$vers" >> ~/.bashrc && source ~/.bashrc
+echo "alias python=/usr/local/bin/python$version" >> ~/.bashrc && source ~/.bashrc
 #Done
 python -V
 echo "Clean"
-sudo rm -rf ../$name*
+sudo rm -rf ~/Python$vers*
