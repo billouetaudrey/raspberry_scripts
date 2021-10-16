@@ -1,5 +1,5 @@
 #Update packages
-sudo apt update && sudo apt upgrade -y && /boot/dietpi/dietpi-update
+apt update && apt upgrade -y && /boot/dietpi/dietpi-update 1
 
 #List all HDD
 fdisk -l
