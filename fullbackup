@@ -1,0 +1,17 @@
+#Update packages
+sudo apt update && sudo apt upgrade -y && /boot/dietpi/dietpi-update
+
+#List all HDD
+fdisk -l
+
+#Choose Backup Partition && Mount
+echo "Enter hdd"
+read hdd
+mkdir /mnt/backup
+mount /dev/$hdd /mnt/backup
+
+#Launch dietpibackup
+/boot/dietpi/dietpi-backup
+
+#Umount when End
+umount /mnt/backup
