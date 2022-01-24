@@ -7,47 +7,47 @@
 
 # Script Tested on:
 # Ubuntu 12.04 on 2/2/2014      [ OK ]
-echo "Enter you backup Directory
-read directory
+
 
 # Plex Database Location.  The trailing slash is
 # needed and important for rsync.
 plexDatabase="/var/lib/plexmediaserver/Library/Application Support/Plex Media Server/"
 
 # Location to backup the directory to.
-backupDirectory="$directory"
+backupDirectory="/mnt/Maxtor/BackupRasp/Plex/"
 
 # Log file for script's output named with
 # the script's name, date, and time of execution.
 scriptName=$(basename ${0})
 log="/var/logs/${scriptName}_`date +%m%d%y%H%M%S`.log"
 
-# Check for root permissions
-if [[ $EUID -ne 0 ]]; then
-  echo -e "${scriptName} requires root privledges.\n"
-  echo -e "sudo $0 $*\n"
-  exit 1
+#Create backup directory
+if [ -d "$backupDirectory" ]; then
+    echo "\033[0;32m Backup Directory is there. \033[m"
+else
+mkdir $backupDirectory
 fi
 
 # Create Log
-echo -e "Staring Backup of Plex Database." > $log 2>&1
-echo -e "------------------------------------------------------------\n" >> $log 2>&1
+echo "Staring Backup of Plex Database."
+echo "------------------------------------------------------------\n"
 
 # Stop Plex
-echo -e "\n\nStopping Plex Media Server." >> $log 2>&1
-echo -e "------------------------------------------------------------\n" >> $log 2>&1
-sudo service plexmediaserver stop >> $log 2>&1
+echo "\n\nStopping Plex Media Server."
+echo "------------------------------------------------------------\n"
+sudo service plexmediaserver stop
 
 # Backup database
-echo -e "\n\nStarting Backup." >> $log 2>&1
-echo -e "------------------------------------------------------------\n" >> $log 2>&1
-sudo rsync -av --delete "$plexDatabase" "$backupDirectory" >> $log 2>&1
+echo "\n\nStarting Backup."
+echo "------------------------------------------------------------\n"
+sudo rsync -a --info=progress2 --delete --exclude "Cache" "$plexDatabase" "$backupDirectory" --log-file=$log
 
 # Restart Plex
-echo -e "\n\nStarting Plex Media Server." >> $log 2>&1
-echo -e "------------------------------------------------------------\n" >> $log 2>&1
-sudo service plexmediaserver start >> $log 2>&1
+echo "\n\nStarting Plex Media Server."
+echo "------------------------------------------------------------\n"
+sudo service plexmediaserver start
 
 # Done
-echo -e "\n\nBackup Complete." >> $log 2>&1
+echo "\n\nBackup Complete."
 
+#Source : https://gist.github.com/ssmereka/8773626
