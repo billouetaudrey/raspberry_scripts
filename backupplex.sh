@@ -20,7 +20,7 @@ backupDirectory="/mnt/Maxtor/BackupRasp/Plex/"
 # the script's name, date, and time of execution.
 scriptName=$(basename ${0})
 log="/var/log/${scriptName}_`date +%m%d%y%H%M%S`.log"
-echo "Log Started" >> $log
+echo "Log Started" > $log
 
 #Create backup directory
 if [ -d "$backupDirectory" ]; then
