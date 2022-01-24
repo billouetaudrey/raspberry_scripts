@@ -51,7 +51,7 @@ sudo service plexmediaserver start
 # Done
 echo "\n\nBackup Complete."
 
-#Send mail
+#Send mail : https://doc.ubuntu-fr.org/msmtp
 mutt -s "Log Backup Plex" -c ***@gmail.com < $log
 
 
