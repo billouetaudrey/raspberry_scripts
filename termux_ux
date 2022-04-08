@@ -1,0 +1,31 @@
+#!/bin/bash
+#Install ubuntu then launch it
+pkg upgrade -y && apt-get update -y && apt install -y wget proot && wget https://github.com/anonymousx97/ubuntu/raw/master/ubuntu.sh && chmod +x ubuntu.sh &&  ./ubuntu.sh -y && ./startubuntu.sh
+
+#apt install on ubuntu
+apt -qq update && apt -qq upgrade -y && \
+    apt -qq install -y --no-install-recommends \
+    apt-utils \
+    curl \
+    git \
+    gnupg2 \
+    wget \
+    unzip \
+    tree \
+gcc zlib1g-dev \
+    apt-transport-https \
+    build-essential coreutils jq pv \
+    ffmpeg mediainfo \
+    neofetch \
+    p7zip-full \
+    libfreetype6-dev libjpeg-dev libpng-dev libgif-dev libwebp-dev
+    
+#Install python3.9 and pip
+alias python3='python3.9'
+apt install python3.9 python3.9-dev python3.9-distutils libxslt-dev libxml2 nano
+curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py && python3.9 get-pip.py 
+
+#Clone UX and install requirements
+git clone https://github.com/Anonymous-X97/UX-jutsu ux 
+cd ux
+pip install --no-cache-dir -r requirements.txt
